@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="mapp" ng-controller="ctrl">
+		<ul>
+		<li ng-repeat="x in data1">
+			{{x.name}}
+			{{x.age}}
+		</li>
+		</ul>
+	</div>
+</body>
+<script>
+	var app=angular.module('mapp',[]);
+	app.controller('ctrl',['$scope','$http',function($scope4,$http)
+	{
+		$http.get("fetch.php").then(function(data1)
+		{
+			$scope.data1=data1;
+		})
+		.error(function()
+		{
+			$scope.data1="error in fetching data";
+		});
+	}]);
+</script>
+</html>
